@@ -1,0 +1,15 @@
+{
+  "name": "glitch",
+  "version": "1.0.0",
+  "description": "A game by Brian Shea - metalbabble.com",
+  "main": "js/game.js",
+  "scripts": {
+    "start": "browser-sync start --server --files=\"**/*.js\""
+  },
+  "author": "Brian Shea",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.26.7",
+    "http-server": "^0.12.1"
+  }
+}
