@@ -125,7 +125,7 @@ var WorldScene = new Phaser.Class({
         zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
         
         // shake the world
-        this.cameras.main.shake(300);
+        this.cameras.main.flash(1000);
         
         // start battle 
     },
