@@ -1,4 +1,4 @@
-/** GLITCH GAME by Brian Shea Copyright 2020 metalbabble.com*/
+/* GLITCH GAME by Brian Shea Copyright 2020 metalbabble.com */
 
 var BootScene = new Phaser.Class({
 
@@ -97,7 +97,7 @@ var WorldScene = new Phaser.Class({
         this.physics.world.bounds.height = map.heightInPixels;
         this.player.setCollideWorldBounds(true);
         
-        // don't walk on trees
+        // don't walk through obstacles
         this.physics.add.collider(this.player, obstacles);
 
         // limit camera to map
