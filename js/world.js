@@ -1,35 +1,3 @@
-/* GLITCH GAME by Brian Shea Copyright 2020 metalbabble.com */
-
-var BootScene = new Phaser.Class({
-
-    Extends: Phaser.Scene,
-
-    initialize:
-
-    function BootScene ()
-    {
-        Phaser.Scene.call(this, { key: 'BootScene' });
-    },
-
-    preload: function ()
-    {
-        // map tiles
-        this.load.image('tiles', 'assets/map/spritesheet.png');
-        
-        // map in json format
-        this.load.tilemapTiledJSON('map', 'assets/map/map.json');
-        
-        // our two characters
-        this.load.spritesheet('player', 'assets/chara.png', { frameWidth: 16, frameHeight: 16 });
-    },
-
-    create: function ()
-    {
-        // start the WorldScene
-        this.scene.start('WorldScene');
-    }
-});
-
 var WorldScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -182,23 +150,3 @@ var WorldScene = new Phaser.Class({
     
 });
 
-var config = {
-    type: Phaser.AUTO,
-    parent: 'content',
-    width: 320,
-    height: 240,
-    zoom: 3,
-    pixelArt: true,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 },
-            debug: false // set to true to view zones
-        }
-    },
-    scene: [
-        BootScene,
-        WorldScene
-    ]
-};
-var game = new Phaser.Game(config);

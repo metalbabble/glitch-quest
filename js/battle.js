@@ -1,4 +1,4 @@
-var BootScene = new Phaser.Class({
+/*var BootScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
@@ -21,7 +21,7 @@ var BootScene = new Phaser.Class({
     {
         this.scene.start("BattleScene");
     }
-});
+});*/
 
 var BattleScene = new Phaser.Class({
 
@@ -414,7 +414,7 @@ var Message = new Phaser.Class({
         this.visible = false;
     }
 });
-
+/*
 var config = {
     type: Phaser.AUTO,
     parent: "content",
@@ -431,4 +431,4 @@ var config = {
     scene: [ BootScene, BattleScene, UIScene ]
 };
 
-var game = new Phaser.Game(config);
+var game = new Phaser.Game(config);*/
