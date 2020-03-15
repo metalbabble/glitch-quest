@@ -27,8 +27,9 @@ var UIScene = new Phaser.Class({
         this.graphics.fillRect(102, 150, 210, 85);
 
         // player stats (top)
-        this.graphics.strokeRect(4, 4, 310, 60);
-        this.graphics.fillRect(4, 4, 310, 60);
+        var statBoxHeight = /* players x */ 20;
+        this.graphics.strokeRect(4, 4, 310, statBoxHeight/*60 */);
+        this.graphics.fillRect(4, 4, 310, statBoxHeight);
         
         // basic container to hold all menus
         this.menus = this.add.container();
@@ -49,7 +50,7 @@ var UIScene = new Phaser.Class({
         this.battleScene = this.scene.get("BattleScene");
         
         //this.remapHeroes();
-        //this.remapEnemies();
+        //this.remapEnemies();        
         
        // listen for keyboard events
        this.input.keyboard.on("keydown", this.onKeyInput, this);   
@@ -299,6 +300,7 @@ var ActionsMenu = new Phaser.Class({
     initialize: function ActionsMenu(x, y, scene) {
         Menu.call(this, x, y, scene);   
         this.addMenuItem("Attack");
+        this.addMenuItem("Capture");
         this.addMenuItem("Run");
     },
     confirm: function() {      

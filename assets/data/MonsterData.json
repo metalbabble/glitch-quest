@@ -30,5 +30,21 @@
         "atk": 2,
         "def": 2,
         "type": "r"
-    }
+    },
+    {
+        "name": "Dread Knight",
+        "hp": 50,
+        "img": "knight.png",
+        "atk": 5,
+        "def": 5,
+        "type": "r"
+    },
+    {
+        "name": "Royal Knight",
+        "hp": 80,
+        "img": "royal-knight.png",
+        "atk": 5,
+        "def": 5,
+        "type": "r"
+    }	
 ]}

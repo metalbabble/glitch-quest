@@ -31,10 +31,24 @@ var BootScene = new Phaser.Class({
         this.load.image("orange-goo.png", "assets/monsters/orange-goo.png");
         this.load.image("trash-mimic.png", "assets/monsters/trash-mimic.png");
         this.load.image("ice-bird.png", "assets/monsters/ice-bird.png");
+        this.load.image("royal-knight.png", "assets/monsters/royal-knight.png");
+        this.load.image("knight.png", "assets/monsters/knight.png");
+       
     },
 
     create: function ()
     {
+        /* TODO: make this work... might need to happen at preload
+
+        // auto-load enemy gfx based on json contents
+        var monsters = game.cache.json.get('MonsterData').MonsterData;
+        for(var i=0; i<monsters.length; i++){
+            this.load.image(monsters[i].img, "assets/monsters/" + monsters[i].img);
+            console.log(monsters[i].img + ", " + "assets/monsters/" + monsters[i].img);
+        }
+        
+        */
+
         // start the WorldScene
         this.scene.start('WorldScene');
     }
