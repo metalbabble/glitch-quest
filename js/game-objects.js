@@ -1,5 +1,6 @@
-var MonsterUnit = new Phaser.Class({
+var MonsterInfo = new Phaser.Class({
     name : String,
     maxHp : Number,
     hp : Number
 });
+

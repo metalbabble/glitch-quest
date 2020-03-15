@@ -23,6 +23,10 @@ var BootScene = new Phaser.Class({
         // load battle resources
         this.load.spritesheet("player", "assets/chara.png", { frameWidth: 16, frameHeight: 16 });
         
+        // load monster data json
+        this.load.json('MonsterData', '/assets/data/MonsterData.json');
+
+        // load enemy gfx
         this.load.image("blue-goo", "assets/monsters/blue-goo.png");
         this.load.image("orange-goo", "assets/monsters/orange-goo.png");
         this.load.image("trash-mimic", "assets/monsters/trash-mimic.png");

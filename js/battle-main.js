@@ -14,6 +14,10 @@ var BattleScene = new Phaser.Class({
         this.sys.events.on('wake', this.startBattle, this);                              
     },
     startBattle: function() {
+        // prep monster data
+        var monsterJSON = game.cache.json.get('MonsterData');
+        console.log(monsterJSON.MonsterData[0]);
+
         // set the battle background color
         this.cameras.main.setBackgroundColor("#503000");
 

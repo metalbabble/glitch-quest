@@ -1,0 +1,26 @@
+{"MonsterData":[
+    {
+        "name": "Blue Goo",
+        "maxHp": 10,
+        "img": "/assets/monsters/blue-goo.png",
+        "atk": 2
+    },
+    {
+        "name": "Orange Goo",
+        "maxHp": 20,
+        "img": "/assets/monsters/orange-goo.png",
+        "atk": 5
+    },
+    {
+        "name": "Ice Bird",
+        "maxHp": 50,
+        "img": "/assets/monsters/ice-bird.png",
+        "atk": 5
+    },
+    {
+        "name": "Trash Mimic",
+        "maxHp": 40,
+        "img": "/assets/monsters/trash-mimic.png",
+        "atk": 2
+    }
+]}
