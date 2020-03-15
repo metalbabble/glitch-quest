@@ -17,15 +17,15 @@ var BattleScene = new Phaser.Class({
         // prep monster data
         var monsterJSON = game.cache.json.get('MonsterData');
         console.log(monsterJSON.MonsterData[0]);
-        var m1 = monsterJSON.MonsterData[Phaser.Math.Between(0, 3)];
-        var m2 = monsterJSON.MonsterData[Phaser.Math.Between(0, 3)];
-        var m3 = monsterJSON.MonsterData[Phaser.Math.Between(0, 3)];
+        var m1 = monsterJSON.MonsterData[Phaser.Math.Between(0, monsterJSON.MonsterData.length-1)];
+        var m2 = monsterJSON.MonsterData[Phaser.Math.Between(0, monsterJSON.MonsterData.length-1)];
+        var m3 = monsterJSON.MonsterData[Phaser.Math.Between(0, monsterJSON.MonsterData.length-1)];
 
         // set the battle background color
-        this.cameras.main.setBackgroundColor("#503000");
+        this.cameras.main.setBackgroundColor("#000000");//brown: 503000
 
         // players
-        var player1 = new PlayerCharacter(this, 550, -100, "player", 1, "Player", 100, 200);        
+        var player1 = new PlayerCharacter(this, 550, -100, "player", 1, currentGame.playerName, 100, 200);        
         this.add.existing(player1);
         var player2 = new PlayerCharacter(this, 550, -100, "player", 4, "Player 2", 80, 100);
         this.add.existing(player2);            
