@@ -1,10 +1,10 @@
+var OverWorldEnabled;
+
 var WorldScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize:
-
-    function WorldScene ()
+    initialize: function WorldScene ()
     {
         Phaser.Scene.call(this, { key: 'WorldScene' });
     },
@@ -84,16 +84,22 @@ var WorldScene = new Phaser.Class({
             // parameters are x, y, width, height
             this.spawns.create(x, y, 20, 20);            
         }        
+
         // add collider
         this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+
         // we listen for 'wake' event
         this.sys.events.on('wake', this.wake, this);
+
+        // misc
+        OverWorldEnabled = true;
     },
     wake: function() {
         this.cursors.left.reset();
         this.cursors.right.reset();
         this.cursors.up.reset();
         this.cursors.down.reset();
+        OverWorldEnabled = true;
     },
     onMeetEnemy: function(player, zone) {        
         // we move the zone to some other location
@@ -101,62 +107,69 @@ var WorldScene = new Phaser.Class({
         zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
 
         // battle fx!!
-        this.cameras.main.flash(1000);        
+        this.cameras.main.flash(400);        
         
         // start battle
         console.log("Random encounter!");
+        OverWorldEnabled = false;
         this.input.stopPropagation();
+        
+        var timeEvent = this.time.addEvent(
+            {delay: 500, callback: this.switchToBattle, callbackScope: this});
+    },
+    switchToBattle: function () {
         this.scene.switch('BattleScene'); 
     },
     update: function (time, delta)
     {
-    //    this.controls.update(delta);
-    
+    //    this.controls.update(delta); 
         this.player.body.setVelocity(0);
 
-        // Horizontal movement
-        if (this.cursors.left.isDown)
-        {
-            this.player.body.setVelocityX(-80);
-        }
-        else if (this.cursors.right.isDown)
-        {
-            this.player.body.setVelocityX(80);
-        }
+        if(OverWorldEnabled){
+            // Horizontal movement
+            if (this.cursors.left.isDown)
+            {
+                this.player.body.setVelocityX(-80);
+            }
+            else if (this.cursors.right.isDown)
+            {
+                this.player.body.setVelocityX(80);
+            }
 
-        // Vertical movement
-        if (this.cursors.up.isDown)
-        {
-            this.player.body.setVelocityY(-80);
-        }
-        else if (this.cursors.down.isDown)
-        {
-            this.player.body.setVelocityY(80);
-        }        
+            // Vertical movement
+            if (this.cursors.up.isDown)
+            {
+                this.player.body.setVelocityY(-80);
+            }
+            else if (this.cursors.down.isDown)
+            {
+                this.player.body.setVelocityY(80);
+            }        
 
-        // Update the animation last and give left/right animations
-        // precedence over up/down animations
-        if (this.cursors.left.isDown)
-        {
-            this.player.anims.play('left', true);
-            this.player.flipX = true;
-        }
-        else if (this.cursors.right.isDown)
-        {
-            this.player.anims.play('right', true);
-            this.player.flipX = false;
-        }
-        else if (this.cursors.up.isDown)
-        {
-            this.player.anims.play('up', true);
-        }
-        else if (this.cursors.down.isDown)
-        {
-            this.player.anims.play('down', true);
-        }
-        else
-        {
-            this.player.anims.stop();
+            // Update the animation last and give left/right animations
+            // precedence over up/down animations
+            if (this.cursors.left.isDown)
+            {
+                this.player.anims.play('left', true);
+                this.player.flipX = true;
+            }
+            else if (this.cursors.right.isDown)
+            {
+                this.player.anims.play('right', true);
+                this.player.flipX = false;
+            }
+            else if (this.cursors.up.isDown)
+            {
+                this.player.anims.play('up', true);
+            }
+            else if (this.cursors.down.isDown)
+            {
+                this.player.anims.play('down', true);
+            }
+            else
+            {
+                this.player.anims.stop();
+            }
         }
     }
     

@@ -5,9 +5,12 @@ var UIScene = new Phaser.Class({
     {
         Phaser.Scene.call(this, { key: "UIScene" });
     },
-
     create: function ()
     {    
+        this.initBattleMenus();
+        this.sys.events.on('wake', this.initBattleMenus, this);           
+    },
+    initBattleMenus: function() {
         console.log("Starting battle UI");
                 
         // layout the battle windows
@@ -68,7 +71,7 @@ var UIScene = new Phaser.Class({
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);        
         
-        this.createMenu();           
+        this.createMenu();       
     },
     createMenu: function() {
         // map hero menu items to heroes

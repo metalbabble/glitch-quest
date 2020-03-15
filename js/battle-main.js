@@ -8,13 +8,14 @@ var BattleScene = new Phaser.Class({
     }, 
     create: function ()
     {
-        // change the background to green
-        this.cameras.main.setBackgroundColor("#503000");
         this.startBattle();
         // on wake event we call startBattle too
         this.sys.events.on('wake', this.startBattle, this);                     
     },
     startBattle: function() {
+        // set the battle background color
+        this.cameras.main.setBackgroundColor("#503000");
+
         // player 1
         var player1 = new PlayerCharacter(this, 550, -100, "player", 1, "Player", 100, 200);        
         this.add.existing(player1);
