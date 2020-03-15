@@ -34,7 +34,9 @@ var BattleScene = new Phaser.Class({
         this.add.existing(dragonblue);
         
         // enemy 2
-        var dragonOrange = new Enemy(this, 150, 100, "orange-goo", null,"Orange Goo", 50, 3);
+        //var dragonOrange = new Enemy(this, 150, 100, "orange-goo", null,"Orange Goo", 50, 3);
+        //this.add.existing(dragonOrange);
+        var dragonOrange = new Enemy(this, 150, 100, "ice-bird", null,"Ice Bird", 50, 3);
         this.add.existing(dragonOrange);
         
         // enemy 3

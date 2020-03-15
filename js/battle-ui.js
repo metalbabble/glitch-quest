@@ -147,7 +147,10 @@ var Message = new Phaser.Class({
         graphics.strokeRect(-156, 115, 310, 90);
         graphics.fillRect(-156, 115, 310, 90);
         this.text = new Phaser.GameObjects.Text(scene, -154, 120, "", 
-            { color: "#ffffff", fontSize: 12, wordWrap: { width: 160, useAdvancedWrap: true }
+            { font:"8px gamefont",
+              color: "#ffffff",
+              fontSize: 12,
+              wordWrap: { width: 160, useAdvancedWrap: true }
         });
         this.add(this.text);
         //this.text.setOrigin(0.5);        
@@ -178,8 +181,8 @@ var MenuItem = new Phaser.Class({
     initialize: function MenuItem(x, y, text, scene/*, extraDetails*/) {
         //console.log("MENU TEXT: " + text + "extra details=" + extraDetails);
         //console.log(this);
-        Phaser.GameObjects.Text.call(this, scene, x, y, text, 
-            { color: "#ffffff", align: "left", fontSize: 12});
+        Phaser.GameObjects.Text.call(this, scene, x, y, text /*+ "extra-stuff-goes-here"*/, 
+            { color: "#ffffff", align: "left", fontSize: 12, font:"8px gamefont"});
     },
     
     select: function() {
@@ -213,7 +216,7 @@ var Menu = new Phaser.Class({
         this.selected = false;
     },     
     addMenuItem: function(unit) {
-        var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene, this.name);
+        var menuItem = new MenuItem(0, this.menuItems.length * 12, unit, this.scene, this.name);
         this.menuItems.push(menuItem);
         this.add(menuItem);    
         return menuItem;    
