@@ -4,6 +4,7 @@
         "maxHp": 10,
         "img": "/assets/monsters/blue-goo.png",
         "atk": 2,
+        "def": 1,
         "type": "r"
     },
     {
@@ -11,6 +12,7 @@
         "maxHp": 20,
         "img": "/assets/monsters/orange-goo.png",
         "atk": 5,
+        "def": 1,
         "type": "p"
     },
     {
@@ -18,6 +20,7 @@
         "maxHp": 50,
         "img": "/assets/monsters/ice-bird.png",
         "atk": 5,
+        "def": 2,
         "type": "s"
     },
     {
@@ -25,6 +28,7 @@
         "maxHp": 40,
         "img": "/assets/monsters/trash-mimic.png",
         "atk": 2,
+        "def": 2,
         "type": "r"
     }
 ]}
