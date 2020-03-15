@@ -1,3 +1,4 @@
+// https://rexrainbow.github.io/phaser3-rex-notes/docs/site/scenemanager/
 var BattleScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -10,7 +11,7 @@ var BattleScene = new Phaser.Class({
     {
         this.startBattle();
         // on wake event we call startBattle too
-        this.sys.events.on('wake', this.startBattle, this);                     
+        this.sys.events.on('wake', this.startBattle, this);                              
     },
     startBattle: function() {
         // set the battle background color
@@ -47,10 +48,9 @@ var BattleScene = new Phaser.Class({
         // array with both parties, who will attack
         this.units = this.heroes.concat(this.enemies);
         
-        this.index = -1;     // the current active unit in battle
+        this.index = -1;     // the current active unit in battle 
 
-        // Run UI Scene at the same time
-        this.scene.launch("UIScene");   
+        this.scene.run("UIScene");
     },
     nextTurn: function() {
         console.log("Start next turn");

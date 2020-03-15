@@ -110,7 +110,8 @@ var UIScene = new Phaser.Class({
         var enemies = this.battleScene.enemies;
         this.enemiesMenu.remap(enemies);
     },
-    onKeyInput: function(event) {           
+    onKeyInput: function(event) {      
+        //console.log("currentmenu=" + this.currentMenu + "selected=" +  this.currentMenu.selected);     
         if(this.currentMenu && this.currentMenu.selected) {
             if(event.code === "ArrowUp") {
                 this.currentMenu.moveSelectionUp();

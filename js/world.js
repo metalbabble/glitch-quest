@@ -1,4 +1,4 @@
-var OverWorldEnabled;
+var OverWorldEnabled; // is movement allowed on overworld?
 
 var WorldScene = new Phaser.Class({
 
@@ -16,6 +16,8 @@ var WorldScene = new Phaser.Class({
 
     create: function ()
     {
+        console.log("*** World create called. ***");
+
         // create the map
         var map = this.make.tilemap({ key: 'map' });
         
@@ -125,7 +127,10 @@ var WorldScene = new Phaser.Class({
     //    this.controls.update(delta); 
         this.player.body.setVelocity(0);
 
-        if(OverWorldEnabled){
+        if(!OverWorldEnabled){
+            // don't move... just... stop
+            this.player.anims.stop();
+        }else{
             // Horizontal movement
             if (this.cursors.left.isDown)
             {
