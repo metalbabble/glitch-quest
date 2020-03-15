@@ -29,14 +29,14 @@ var WorldScene = new Phaser.Class({
         // make all tiles in obstacles collidable
         obstacles.setCollisionByExclusion([-1]);
         
-        //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
+        //  animation with key 'left', we don't need left and right as we will
+        // use one and flip the sprite
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13]}),
             frameRate: 10,
             repeat: -1
-        });
-        
+        });        
         // animation with key 'right'
         this.anims.create({
             key: 'right',
@@ -58,14 +58,14 @@ var WorldScene = new Phaser.Class({
         });        
 
         // our player sprite created through the phycis system
-        this.player = this.physics.add.sprite(50, 100, 'player', 6);
+        this.player = this.physics.add.sprite(50, 185, 'player', 6);
         
         // don't go out of the map
         this.physics.world.bounds.width = map.widthInPixels;
         this.physics.world.bounds.height = map.heightInPixels;
         this.player.setCollideWorldBounds(true);
         
-        // don't walk through obstacles
+        // don't walk through obstacle layer items
         this.physics.add.collider(this.player, obstacles);
 
         // limit camera to map
@@ -86,16 +86,27 @@ var WorldScene = new Phaser.Class({
         }        
         // add collider
         this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+        // we listen for 'wake' event
+        this.sys.events.on('wake', this.wake, this);
+    },
+    wake: function() {
+        this.cursors.left.reset();
+        this.cursors.right.reset();
+        this.cursors.up.reset();
+        this.cursors.down.reset();
     },
     onMeetEnemy: function(player, zone) {        
         // we move the zone to some other location
         zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
         zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+
+        // battle fx!!
+        this.cameras.main.flash(1000);        
         
-        // shake the world
-        this.cameras.main.flash(1000);
-        
-        // start battle 
+        // start battle
+        console.log("Random encounter!");
+        this.input.stopPropagation();
+        this.scene.switch('BattleScene'); 
     },
     update: function (time, delta)
     {
@@ -123,7 +134,8 @@ var WorldScene = new Phaser.Class({
             this.player.body.setVelocityY(80);
         }        
 
-        // Update the animation last and give left/right animations precedence over up/down animations
+        // Update the animation last and give left/right animations
+        // precedence over up/down animations
         if (this.cursors.left.isDown)
         {
             this.player.anims.play('left', true);
