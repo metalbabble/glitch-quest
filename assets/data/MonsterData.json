@@ -3,24 +3,28 @@
         "name": "Blue Goo",
         "maxHp": 10,
         "img": "/assets/monsters/blue-goo.png",
-        "atk": 2
+        "atk": 2,
+        "type": "r"
     },
     {
         "name": "Orange Goo",
         "maxHp": 20,
         "img": "/assets/monsters/orange-goo.png",
-        "atk": 5
+        "atk": 5,
+        "type": "p"
     },
     {
         "name": "Ice Bird",
         "maxHp": 50,
         "img": "/assets/monsters/ice-bird.png",
-        "atk": 5
+        "atk": 5,
+        "type": "s"
     },
     {
         "name": "Trash Mimic",
         "maxHp": 40,
         "img": "/assets/monsters/trash-mimic.png",
-        "atk": 2
+        "atk": 2,
+        "type": "r"
     }
 ]}
