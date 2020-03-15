@@ -7,8 +7,8 @@ var UIScene = new Phaser.Class({
     },
     create: function ()
     {    
-        this.initBattleMenus();
-        this.sys.events.on('wake', this.initBattleMenus, this);           
+        this.initBattleMenus();        
+        //this.sys.events.on('wake', this.initBattleMenus, this);           
     },
     initBattleMenus: function() {
         console.log("Starting battle UI");
@@ -54,24 +54,18 @@ var UIScene = new Phaser.Class({
        // listen for keyboard events
        this.input.keyboard.on("keydown", this.onKeyInput, this);   
         
-       // when its player unit turn to move
-       this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
-       
-       // when the action on the menu is selected
-       // for now we have only one action so we dont send and action id
-       this.events.on("SelectedAction", this.onSelectedAction, this);
-       
-       // an enemy is selected
-       this.events.on("Enemy", this.onEnemy, this);
-
-        // when the scene receives wake event
-        this.sys.events.on('wake', this.createMenu, this);
+       // wire up events
+       this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this); // when its player unit turn to move
+       this.battleScene.events.on('PlayerDamage', this.onPlayerDamage, this);// event handler for damage shake fx
+       this.events.on("SelectedAction", this.onSelectedAction, this); // when the action on the menu is selected
+       this.events.on("Enemy", this.onEnemy, this); // an enemy is selected      
+       this.sys.events.on('wake', this.createMenu, this);// when the scene receives wake event              
         
-        // message describing current action
-        this.message = new Message(this, this.battleScene.events);
-        this.add.existing(this.message);        
+       // message describing current action
+       this.message = new Message(this, this.battleScene.events);
+       this.add.existing(this.message);        
         
-        this.createMenu();       
+       this.createMenu();       
     },
     createMenu: function() {
         // map hero menu items to heroes
@@ -101,6 +95,9 @@ var UIScene = new Phaser.Class({
     onSelectedAction: function() {
         this.currentMenu = this.enemiesMenu;
         this.enemiesMenu.select(0);
+    },
+    onPlayerDamage: function() {
+        this.cameras.main.shake(300);
     },
     remapHeroes: function() {
         var heroes = this.battleScene.heroes;

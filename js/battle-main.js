@@ -42,7 +42,9 @@ var BattleScene = new Phaser.Class({
         this.add.existing(trashMimic);
       
         // array with heroes
-        this.heroes = [ player1, player2, player3 ];
+        //this.heroes = [ player1, player2, player3 ];
+        this.heroes = [ player1];
+
         // array with enemies
         this.enemies = [ dragonblue, dragonOrange, trashMimic];
         // array with both parties, who will attack
@@ -50,7 +52,7 @@ var BattleScene = new Phaser.Class({
         
         this.index = -1;     // the current active unit in battle 
 
-        this.scene.run("UIScene");
+        this.scene.run("UIScene");        
     },
     nextTurn: function() {
         console.log("Start next turn");
@@ -82,6 +84,9 @@ var BattleScene = new Phaser.Class({
                 
                 // shake and blink for damage fx
                 this.cameras.main.shake(300);
+
+                // send event for ui to shake also
+                this.events.emit("PlayerDamage");
                 
                 // add timer for the next turn, so will have smooth gameplay
                 this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
