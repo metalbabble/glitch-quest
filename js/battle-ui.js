@@ -74,6 +74,7 @@ var UIScene = new Phaser.Class({
         // map enemies menu items to enemies
         this.remapEnemies();
         // first move
+        this.battleScene.events.emit("Message", "Monsters draw near!");
         this.battleScene.nextTurn(); 
     },
     onEnemy: function(index) {
