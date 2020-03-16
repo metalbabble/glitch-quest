@@ -1,7 +1,9 @@
 # glitch-game
-A Phaser JS game by Brian Shea
+A JavaScript RPG with Phaser. Game by Brian Shea / metalbabble.com
 
 # startup
+First time, run:
+	npm install
 Run:
 	npm start
 
