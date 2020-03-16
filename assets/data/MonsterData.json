@@ -46,5 +46,13 @@
         "atk": 5,
         "def": 5,
         "type": "r"
-    }	
+    },
+    {
+        "name": "Eye-Mage",
+        "hp": 75,
+        "img": "eye-mage.png",
+        "atk": 5,
+        "def": 2,
+        "type": "r"
+    }		
 ]}

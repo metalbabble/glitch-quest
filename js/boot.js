@@ -33,6 +33,7 @@ var BootScene = new Phaser.Class({
         this.load.image("ice-bird.png", "assets/monsters/ice-bird.png");
         this.load.image("royal-knight.png", "assets/monsters/royal-knight.png");
         this.load.image("knight.png", "assets/monsters/knight.png");
+        this.load.image("eye-mage.png", "assets/monsters/eye-mage.png");
        
     },
 
