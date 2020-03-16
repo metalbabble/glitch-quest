@@ -24,9 +24,9 @@
         "type": "s"
     },
     {
-        "name": "Trash Mimic",
+        "name": "Eye Bug",
         "hp": 40,
-        "img": "trash-mimic.png",
+        "img": "eye-bug.png",
         "atk": 2,
         "def": 2,
         "type": "r"
@@ -48,9 +48,9 @@
         "type": "r"
     },
     {
-        "name": "Eye-Mage",
+        "name": "Virus",
         "hp": 75,
-        "img": "eye-mage.png",
+        "img": "virus.png",
         "atk": 5,
         "def": 2,
         "type": "r"

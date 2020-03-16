@@ -7,5 +7,5 @@ var GameState = new Phaser.Class({
 // start with new blank game
 currentGame = new GameState();
 currentGame.mapNumber = 1;
-currentGame.playerName = "Mr.Hero";
+currentGame.playerName = "Player";
 //currentGame.playerName = prompt("Enter your name...");

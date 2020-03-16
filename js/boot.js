@@ -29,11 +29,11 @@ var BootScene = new Phaser.Class({
         // load enemy gfx
         this.load.image("blue-goo.png", "assets/monsters/blue-goo.png");
         this.load.image("orange-goo.png", "assets/monsters/orange-goo.png");
-        this.load.image("trash-mimic.png", "assets/monsters/trash-mimic.png");
+        this.load.image("virus.png", "assets/monsters/virus.png");
         this.load.image("ice-bird.png", "assets/monsters/ice-bird.png");
         this.load.image("royal-knight.png", "assets/monsters/royal-knight.png");
         this.load.image("knight.png", "assets/monsters/knight.png");
-        this.load.image("eye-mage.png", "assets/monsters/eye-mage.png");
+        this.load.image("eye-bug.png", "assets/monsters/eye-bug.png");
        
     },
 
