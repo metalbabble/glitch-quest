@@ -25,7 +25,7 @@ var BattleScene = new Phaser.Class({
         this.cameras.main.setBackgroundColor("#000000");//brown: 503000
 
         // players
-        var player1 = new PlayerCharacter(this, 550, -100, "player", 1, currentGame.playerName, 100, 200);        
+        var player1 = new PlayerCharacter(this, 550, -100, "player", 1, currentGame.playerName, 50, 50);        
         this.add.existing(player1);
         var player2 = new PlayerCharacter(this, 550, -100, "player", 4, "Player 2", 80, 100);
         this.add.existing(player2);            
@@ -33,11 +33,11 @@ var BattleScene = new Phaser.Class({
         this.add.existing(player3);            
         
         // enemy
-        var e1 = new Enemy(this, 50, 100, m1.img, null, m1.name, m1.hp, m1.atk);
+        var e1 = new Enemy(this, 50, 100, m1.img, null, m1.name, m1.hp, m1.atk, m1.def);
         this.add.existing(e1);
-        var e2 = new Enemy(this, 150, 100, m2.img, null,m2.name, m2.hp, m2.atk);
+        var e2 = new Enemy(this, 150, 100, m2.img, null,m2.name, m2.hp, m2.atk, m2.def);
         this.add.existing(e2);
-        var e3 = new Enemy(this, 250, 100, m3.img, null,m3.name, m3.hp, m3.atk);
+        var e3 = new Enemy(this, 250, 100, m3.img, null,m3.name, m3.hp, m3.atk, m3.def);
         this.add.existing(e3);
       
         // array with heroes
@@ -81,6 +81,8 @@ var BattleScene = new Phaser.Class({
                 // call the enemy"s attack function 
                 this.units[this.index].attack(this.heroes[r]);  
                 
+                // TODO: no shake if miss
+
                 // shake and blink for damage fx
                 this.cameras.main.shake(300);
 
@@ -158,13 +160,14 @@ var BattleScene = new Phaser.Class({
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
  
-    initialize: function Unit(scene, x, y, texture, frame, type, hp, damage) {
+    initialize: function Unit(scene, x, y, texture, frame, type, hp, damage, defense) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame);
         this.type = type;
         this.maxHp = this.hp = hp;
         this.damage = damage; // default damage     
         this.living = true;         
         this.menuItem = null;
+        this.defense = defense;
     },
     // we will use this to notify the menu item when the unit is dead
     setMenuItem: function(item) {
@@ -173,14 +176,28 @@ var Unit = new Phaser.Class({
     // attack the target unit
     attack: function(target) {
         if(target.living) {
-            target.takeDamage(this.damage);
+            // calculate damage
+            var calculatedDmg = this.damage+
+                Phaser.Math.Between(-5, 5);
+            //TODO: calculatedDmg -= target.defense;
+            if(calculatedDmg<0)
+                calculatedDmg=0;
+
+            // assign damage
+            target.takeDamage(calculatedDmg);
             
             // build output text
             var battleMsg = this.type + " attacks! \n" + 
-                            this.damage + " damage to " + target.type + "!";
+                calculatedDmg + " damage to " + target.type + "!";
             if (target.hp < 1)
             {
                 battleMsg += "\n" + target.type + " was defeated!!";
+            }
+
+            // did they miss?
+            if(calculatedDmg==0){
+                battleMsg = this.type + " attacks! MISS!\n" + 
+                    calculatedDmg + " avoids the attack!";
             }
             
             this.scene.events.emit("Message", battleMsg);

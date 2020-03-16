@@ -300,7 +300,7 @@ var ActionsMenu = new Phaser.Class({
     initialize: function ActionsMenu(x, y, scene) {
         Menu.call(this, x, y, scene);   
         this.addMenuItem("Attack");
-        this.addMenuItem("Capture");
+        this.addMenuItem("Recruit");
         this.addMenuItem("Run");
     },
     confirm: function() {      
