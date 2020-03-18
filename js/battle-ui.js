@@ -10,9 +10,7 @@ var UIScene = new Phaser.Class({
         this.initBattleMenus();        
         //this.sys.events.on('wake', this.initBattleMenus, this);           
     },
-    initBattleMenus: function() {
-        console.log("Starting battle UI");
-                
+    initBattleMenus: function() {             
         // layout the battle windows
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(4, 0xffffff);
@@ -86,15 +84,20 @@ var UIScene = new Phaser.Class({
         this.battleScene.receivePlayerSelection("attack", index);   
     },
     onPlayerSelect: function(id) {
-        // when its player turn, select the active hero item and the first action
+        // when its player turn, select the active hero
+        // item and the first action
         // then we make actions menu active
         this.heroesMenu.select(id);
         this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
     },
-    // we have action selected and we make the enemies menu active
-    // the player needs to choose an enemy to attack
-    onSelectedAction: function() {
+    // handles main action command in battle entered
+    // respond to it or select enemy to attack
+    onSelectedAction: function(actionName) {
+        console.log(actionName);
+
+        //TODO: attack.. run.. what?
+        
         this.currentMenu = this.enemiesMenu;
         this.enemiesMenu.select(0);
     },
@@ -110,7 +113,6 @@ var UIScene = new Phaser.Class({
         this.enemiesMenu.remap(enemies);
     },
     onKeyInput: function(event) {      
-        //console.log("currentmenu=" + this.currentMenu + "selected=" +  this.currentMenu.selected);     
         if(this.currentMenu && this.currentMenu.selected) {
             if(event.code === "ArrowUp") {
                 this.currentMenu.moveSelectionUp();
@@ -181,8 +183,6 @@ var MenuItem = new Phaser.Class({
     Extends: Phaser.GameObjects.Text,
     
     initialize: function MenuItem(x, y, text, scene/*, extraDetails*/) {
-        //console.log("MENU TEXT: " + text + "extra details=" + extraDetails);
-        //console.log(this);
         Phaser.GameObjects.Text.call(this, scene, x, y, text /*+ "extra-stuff-goes-here"*/, 
             { color: "#ffffff", align: "left", fontSize: 12, font:"8px gamefont"});
     },
@@ -264,8 +264,14 @@ var Menu = new Phaser.Class({
         this.menuItemIndex = 0;
         this.selected = false;
     },
+    /*
+    getSelectedItemName: function() {
+        return this.menuItems[this.menuItemIndex].name;
+    },*/
     confirm: function() {
-        // wen the player confirms his slection, do the action
+        // when the player confirms his slection
+        // perform the action that was selected
+        // TODO: is this not firing? might be overriden
     },
     // clear menu and remove all menu items
     clear: function() {
@@ -307,7 +313,8 @@ var ActionsMenu = new Phaser.Class({
     confirm: function() {      
         // we select an action and go to the next menu and
         // choose from the enemies to apply the action
-        this.scene.events.emit("SelectedAction");    
+        this.scene.events.emit("SelectedAction", 
+            'TODO: this');    
     }
     
 });

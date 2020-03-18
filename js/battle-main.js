@@ -15,7 +15,7 @@ var BattleScene = new Phaser.Class({
     startBattle: function() {
         // prep monster data
         var monsterJSON = game.cache.json.get('MonsterData');
-        console.log(monsterJSON.MonsterData[0]);
+        //console.log(monsterJSON.MonsterData[0]);
         var m1 = monsterJSON.MonsterData[Phaser.Math.Between(0, monsterJSON.MonsterData.length-1)];
         var m2 = monsterJSON.MonsterData[Phaser.Math.Between(0, monsterJSON.MonsterData.length-1)];
         var m3 = monsterJSON.MonsterData[Phaser.Math.Between(0, monsterJSON.MonsterData.length-1)];
@@ -52,10 +52,8 @@ var BattleScene = new Phaser.Class({
 
         this.scene.run("UIScene");                     
     },
-    nextTurn: function() {
-        console.log("Start next turn");
-        
-        // if we have victory or game over
+    nextTurn: function() {               
+        // check if we have victory or game over
         if(this.checkEndBattle()) {           
             this.endBattle();
             return;
@@ -123,12 +121,8 @@ var BattleScene = new Phaser.Class({
     },
     // when the player have selected the enemy to be attacked
     receivePlayerSelection: function(action, target) {
-        console.log(action);
         if(action == "attack") {                
             this.units[this.index].attack(this.enemies[target]);              
-        }
-        else if (action == "run") { // TODO: this doesn't work
-            exitBattle();
         }
 
         // minor delay before next player input
@@ -137,17 +131,14 @@ var BattleScene = new Phaser.Class({
     
     // return to the world map
     exitBattle: function() {
-        console.log("exitBattle");
         this.scene.sleep('UIScene');
         this.scene.switch('WorldScene');
     },
     wake: function() {
-        console.log("wake");
         this.scene.run('UIScene');  
         this.time.addEvent({delay: 2000, callback: this.exitBattle, callbackScope: this});        
     },
     endBattle: function() {  
-        console.log("Battle ended.");     
         // clear state, remove sprites
         this.heroes.length = 0;
         this.enemies.length = 0;

@@ -8,9 +8,17 @@
         "type": "r"
     },
     {
-        "name": "Orange Goo",
+        "name": "Tang Goo",
         "hp": 20,
         "img": "orange-goo.png",
+        "atk": 5,
+        "def": 1,
+        "type": "p"
+    },
+    {
+        "name": "Boomer",
+        "hp": 20,
+        "img": "boomer.png",
         "atk": 5,
         "def": 1,
         "type": "p"
@@ -24,7 +32,7 @@
         "type": "s"
     },
     {
-        "name": "Eye Bug",
+        "name": "Retinant",
         "hp": 40,
         "img": "eye-bug.png",
         "atk": 2,
@@ -54,5 +62,21 @@
         "atk": 5,
         "def": 2,
         "type": "r"
-    }		
+    },
+    {
+        "name": "Fire Walker",
+        "hp": 75,
+        "img": "fire-walker.png",
+        "atk": 5,
+        "def": 2,
+        "type": "p"
+    },
+    {
+        "name": "Purple Peeper",
+        "hp": 75,
+        "img": "purple-eater.png",
+        "atk": 5,
+        "def": 2,
+        "type": "p"
+    }					
 ]}
