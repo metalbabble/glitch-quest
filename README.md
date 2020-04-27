@@ -1,4 +1,4 @@
-# glitch-game
+# glitch-quest
 A JavaScript RPG with Phaser. Game by Brian Shea / metalbabble.com
 This game is a WORK IN PROGRESS - it is not complete!!
 
