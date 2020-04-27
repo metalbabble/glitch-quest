@@ -2,6 +2,7 @@
 A JavaScript RPG with Phaser. Game by Brian Shea / metalbabble.com
 This game is a WORK IN PROGRESS - it is not complete!!
 
+![Game Thumbnail](/extras/thumbnail.png)
 # Startup
 First time, run:
 	npm install
