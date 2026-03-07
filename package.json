@@ -9,7 +9,7 @@
   "author": "Brian Shea",
   "license": "ISC",
   "dependencies": {
-    "browser-sync": "^2.26.7",
-    "http-server": "^0.12.1"
+    "browser-sync": "^3.0.4",
+    "http-server": "^14.1.1"
   }
 }
