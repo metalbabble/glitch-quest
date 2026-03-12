@@ -5,13 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch via npm",
-            "type": "node",
+            "name": "Start App (npm start)",
+            "type": "node-terminal",
             "request": "launch",
+            "command": "npm start",
             "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": ["run-script", "start"],
-            "port": 3000
-          }
+            "serverReadyAction": {
+                "pattern": "https?://localhost:[0-9]+",
+                "action": "startDebugging",
+                "name": "Open in Firefox"
+            }
+        },
+        {
+            "name": "Open in Firefox",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "firefox http://localhost:3000",
+            "cwd": "${workspaceFolder}"
+        }
     ]
 }
