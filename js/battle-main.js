@@ -13,6 +13,8 @@ var BattleScene = new Phaser.Class({
         this.sys.events.on('wake', this.startBattle, this);                              
     },
     startBattle: function() {
+        playSceneMusic(this, 'battleMusic');
+
         // prep monster data
         var monsterJSON = game.cache.json.get('MonsterData');
         //console.log(monsterJSON.MonsterData[0]);
@@ -131,6 +133,7 @@ var BattleScene = new Phaser.Class({
     
     // return to the world map
     exitBattle: function() {
+        stopSceneMusic('battleMusic');
         this.scene.sleep('UIScene');
         this.scene.switch('WorldScene');
     },
@@ -139,6 +142,8 @@ var BattleScene = new Phaser.Class({
         this.time.addEvent({delay: 2000, callback: this.exitBattle, callbackScope: this});        
     },
     endBattle: function() {  
+        stopSceneMusic('battleMusic');
+
         // clear state, remove sprites
         this.heroes.length = 0;
         this.enemies.length = 0;

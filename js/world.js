@@ -17,6 +17,7 @@ var WorldScene = new Phaser.Class({
     create: function ()
     {
         console.log("*** World create called. ***");
+        playSceneMusic(this, 'overworldMusic');
 
         // create the map
         var map = this.make.tilemap({ key: 'map' });
@@ -101,6 +102,7 @@ var WorldScene = new Phaser.Class({
         this.cursors.right.reset();
         this.cursors.up.reset();
         this.cursors.down.reset();
+        playSceneMusic(this, 'overworldMusic');
         OverWorldEnabled = true;
     },
     onMeetEnemy: function(player, zone) {        
@@ -120,6 +122,7 @@ var WorldScene = new Phaser.Class({
             {delay: 500, callback: this.switchToBattle, callbackScope: this});
     },
     switchToBattle: function () {
+        stopSceneMusic('overworldMusic');
         this.scene.switch('BattleScene'); 
     },
     update: function (time, delta)

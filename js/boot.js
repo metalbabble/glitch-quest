@@ -1,3 +1,87 @@
+var currentBgm = null;
+var bgmByKey = {};
+var requestedBgmKey = null;
+var requestedBgmScene = null;
+var audioUnlockHandlersBound = false;
+
+function bindAudioUnlockHandlers() {
+    if(audioUnlockHandlersBound) {
+        return;
+    }
+
+    var tryUnlockAudio = function() {
+        if(!requestedBgmScene || !requestedBgmScene.sound) {
+            return;
+        }
+
+        var ctx = requestedBgmScene.sound.context;
+
+        if(requestedBgmScene.sound.unlock) {
+            requestedBgmScene.sound.unlock();
+        }
+
+        if(ctx && ctx.state === 'suspended') {
+            ctx.resume();
+        }
+
+        // Retry queued scene music after audio context resumes.
+        if(requestedBgmKey) {
+            playSceneMusic(requestedBgmScene, requestedBgmKey);
+        }
+    };
+
+    window.addEventListener('pointerdown', tryUnlockAudio, { passive: true });
+    window.addEventListener('keydown', tryUnlockAudio);
+    audioUnlockHandlersBound = true;
+}
+
+function playSceneMusic(scene, key) {
+    requestedBgmKey = key;
+    requestedBgmScene = scene;
+    bindAudioUnlockHandlers();
+
+    var music = bgmByKey[key];
+    if(!music || !music.manager) {
+        music = scene.sound.add(key, { loop: true, volume: 0.5 });
+        bgmByKey[key] = music;
+    }
+
+    if(currentBgm && currentBgm !== music && currentBgm.isPlaying) {
+        currentBgm.stop();
+    }
+
+    currentBgm = music;
+
+    var audioContext = scene.sound.context;
+    if(scene.sound.locked && scene.sound.unlock) {
+        scene.sound.unlock();
+    }
+
+    // Some Phaser builds can leave sound.locked=true even when context is running.
+    // Only gate playback on the actual WebAudio context state.
+    var isAudioLocked = audioContext && audioContext.state !== 'running';
+    if(isAudioLocked) {
+        return;
+    }
+
+    if(!music.isPlaying) {
+        music.play();
+    }
+}
+
+function stopSceneMusic(key) {
+    if(!currentBgm) {
+        return;
+    }
+
+    if(!key || currentBgm.key === key) {
+        if(currentBgm.isPlaying) {
+            currentBgm.stop();
+        }
+        currentBgm = null;
+    }
+}
+
 var BootScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -37,6 +121,10 @@ var BootScene = new Phaser.Class({
         this.load.image("fire-walker.png", "assets/monsters/fire-walker.png");
         this.load.image("purple-eater.png", "assets/monsters/purple-eater.png");
         this.load.image("boomer.png", "assets/monsters/boomer.png");
+
+        // background music
+        this.load.audio('overworldMusic', 'assets/music/overworld.mp3');
+        this.load.audio('battleMusic', 'assets/music/battle.mp3');
        
     },
 
